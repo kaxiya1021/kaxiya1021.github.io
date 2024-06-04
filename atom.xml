@@ -6,7 +6,7 @@
   <link href="https://kaxiya1021.github.io/atom.xml" rel="self"/>
   
   <link href="https://kaxiya1021.github.io/"/>
-  <updated>2024-06-03T07:58:18.372Z</updated>
+  <updated>2024-06-04T12:46:50.121Z</updated>
   <id>https://kaxiya1021.github.io/</id>
   
   <author>
@@ -15,6 +15,52 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Hexo博客迁移记录</title>
+    <link href="https://kaxiya1021.github.io/posts/cc0a516f.html"/>
+    <id>https://kaxiya1021.github.io/posts/cc0a516f.html</id>
+    <published>2024-06-04T12:36:40.000Z</published>
+    <updated>2024-06-04T12:46:50.121Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近换了新电脑，博客还在旧电脑，每次写文档都要把旧电脑打开上传非常麻烦，今天终于打起精神把之前的博客迁移过来了。</p><h3 id="本地安装Node">本地安装Node</h3><p>我使用的是nvm进行node版本管理，因为我之前的博客里使用了hexo douban这个插件，需要18版本的node，所以用nvm管理会比较方便。</p><p>查看当前可安装的版本 <code>nvm list available</code></p><p>考虑到插件我安装了18.20.0版本的node</p><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">nvm</span> install <span class="number">18</span>.<span class="number">20</span>.<span class="number">0</span></span><br><span class="line"><span class="attribute">nvm</span> use <span class="number">18</span>.<span class="number">20</span>.<span class="number">0</span></span><br></pre></td></tr></table></figure><h3 id="全局安装hexo">全局安装hexo</h3><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-<span class="keyword">cli</span></span><br></pre></td></tr></table></figure><p>安装后查看版本</p><p><img src="https://jsd.onmicrosoft.cn/gh/kaxiya1021/tuchuang@main/img/image-20240604162423088.png" alt=""></p><p>出现版本号后证明安装成功</p><h3 id="查看git配置">查看git配置</h3><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config -l</span><br></pre></td></tr></table></figure><p><img src="https://jsd.onmicrosoft.cn/gh/kaxiya1021/tuchuang@main/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202024-06-04%20163524.png" alt=""></p><p>我的user.emal和user.name已经配置过了，如果没有配置需要配一下</p><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config <span class="attr">--global</span> user<span class="selector-class">.name</span> <span class="string">&quot;你的用户名&quot;</span></span><br><span class="line">git config <span class="attr">--global</span> user<span class="selector-class">.email</span> <span class="string">&quot;你的邮箱&quot;</span></span><br></pre></td></tr></table></figure><h3 id="ssh连接github">ssh连接github</h3><figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -<span class="built_in">t</span> rsa -C <span class="string">&quot;你的邮箱&quot;</span></span><br></pre></td></tr></table></figure><p>输入后一路回车就行，然后用记事本打开上述图片中的公钥（id_rsa.pub），复制里面的内容，然后开始在github中配置ssh密钥，进入github，点击右上角头像 选择<code>settings</code>，进入设置页后选择 <code>SSH and GPG keys</code>，名字随便起，公钥填到<code>Key</code>那一栏。</p><p>测试连接，输入以下命令</p><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">ssh</span> -T git<span class="variable">@github</span>.com</span><br></pre></td></tr></table></figure><p>出现这个画面就ok了</p><p><img src="https://jsd.onmicrosoft.cn/gh/kaxiya1021/tuchuang@main/img/image-20240604164758370.png" alt=""></p><p>然后就是把之前的blog文档打包迁移到新电脑上，一些目录不需要可以删除掉，最终只保留了如图所示这些：</p><p><img src="https://jsd.onmicrosoft.cn/gh/kaxiya1021/tuchuang@main/img/image-20240604191035545.png" alt=""></p><h3 id="本地环境配置">本地环境配置</h3><p>然后开始执行 <code>npm install</code>，等待一段时间安装完后再安装豆瓣插件 <code>npm install hexo-douban --save-dev</code></p><p>，紧接着<code>hexo s</code>预览成功就可以啦</p><p>然后执行 <code>hexo deploy</code>部署到github（注：安装完 <code>hexo douban</code> 后就不能使用 <code>hexo d</code> 部署到远程了，需要打全称 <code>deploy</code>）</p><p><img src="https://jsd.onmicrosoft.cn/gh/kaxiya1021/tuchuang@main/img/image-20240604194458668.png" alt=""></p>]]></content>
+    
+    
+    <summary type="html">最近换了新电脑，博客还在旧电脑，每次写文档都要把旧电脑打开上传非常麻烦，今天终于打起精神把之前的博客迁移过来了</summary>
+    
+    
+    
+    <category term="博客" scheme="https://kaxiya1021.github.io/categories/%E5%8D%9A%E5%AE%A2/"/>
+    
+    
+    <category term="博客" scheme="https://kaxiya1021.github.io/tags/%E5%8D%9A%E5%AE%A2/"/>
+    
+    <category term="Hexo" scheme="https://kaxiya1021.github.io/tags/Hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PicGo-github图床搭建</title>
+    <link href="https://kaxiya1021.github.io/posts/dc45b4c0.html"/>
+    <id>https://kaxiya1021.github.io/posts/dc45b4c0.html</id>
+    <published>2024-06-04T12:28:10.000Z</published>
+    <updated>2024-06-04T12:32:16.352Z</updated>
+    
+    <content type="html"><![CDATA[<p>去PicGo的github仓库下载安装包：<a href="https://github.com/Molunerfinn/PicGo/releases/tag/v2.3.1">Release 2.3.1 · Molunerfinn/PicGo (github.com)</a></p><p><img src="https://jsd.onmicrosoft.cn/gh/kaxiya1021/tuchuang@main/img/image-20240604200903336.png" alt=""></p><p>在github上开一个新仓库，然后申请一个token，在PicGo里配置如下：</p><p><img src="https://jsd.onmicrosoft.cn/gh/kaxiya1021/tuchuang@main/img/image-20240604201648132.png" alt=""></p><p>仓库名：[user_name]/[repo_name]</p><p>CDN： <a href="https://jsd.onmicrosoft.cn/gh/%5Buser_name%5D/%5Brepo_name%5D@main">https://jsd.onmicrosoft.cn/gh/[user_name]/[repo_name]@main</a></p><p>然后就可以拖动图片上传啦~</p><p><img src="https://jsd.onmicrosoft.cn/gh/kaxiya1021/tuchuang@main/img/image-20240604201910252.png" alt=""></p>]]></content>
+    
+    
+    <summary type="html">三分钟搭建个人图床</summary>
+    
+    
+    
+    <category term="图床" scheme="https://kaxiya1021.github.io/categories/%E5%9B%BE%E5%BA%8A/"/>
+    
+    
+    <category term="图床" scheme="https://kaxiya1021.github.io/tags/%E5%9B%BE%E5%BA%8A/"/>
+    
+    <category term="博客" scheme="https://kaxiya1021.github.io/tags/%E5%8D%9A%E5%AE%A2/"/>
+    
+  </entry>
   
   <entry>
     <title>算法刷题记录(二)</title>
