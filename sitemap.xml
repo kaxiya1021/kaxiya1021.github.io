@@ -2,6 +2,24 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://kaxiya1021.github.io/posts/d566576e.html</loc>
+    
+    <lastmod>2024-06-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://kaxiya1021.github.io/posts/1a4b62fe.html</loc>
+    
+    <lastmod>2024-06-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://kaxiya1021.github.io/posts/dc45b4c0.html</loc>
     
     <lastmod>2024-06-04</lastmod>
@@ -66,15 +84,6 @@
   
   <url>
     <loc>https://kaxiya1021.github.io/posts/bf53f1b3.html</loc>
-    
-    <lastmod>2024-06-03</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://kaxiya1021.github.io/posts/1a4b62fe.html</loc>
     
     <lastmod>2024-06-03</lastmod>
     
@@ -360,6 +369,20 @@
     <priority>0.2</priority>
   </url>
   
+  <url>
+    <loc>https://kaxiya1021.github.io/tags/LLM/</loc>
+    <lastmod>2024-06-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://kaxiya1021.github.io/tags/Fine-tuning/</loc>
+    <lastmod>2024-06-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
 
   
   <url>
@@ -399,6 +422,13 @@
   
   <url>
     <loc>https://kaxiya1021.github.io/categories/%E5%8D%9A%E5%AE%A2/</loc>
+    <lastmod>2024-06-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://kaxiya1021.github.io/categories/LLM/</loc>
     <lastmod>2024-06-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
