@@ -6,7 +6,7 @@
   <link href="https://kaxiya1021.github.io/atom.xml" rel="self"/>
   
   <link href="https://kaxiya1021.github.io/"/>
-  <updated>2024-06-04T13:17:04.553Z</updated>
+  <updated>2024-06-05T10:52:57.644Z</updated>
   <id>https://kaxiya1021.github.io/</id>
   
   <author>
@@ -17,13 +17,26 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>使用LLaMA-Factory进行大模型微调(上)</title>
+    <title>重新搭建哔哔页面</title>
+    <link href="https://kaxiya1021.github.io/posts/515c1bbb.html"/>
+    <id>https://kaxiya1021.github.io/posts/515c1bbb.html</id>
+    <published>2024-06-05T09:35:34.000Z</published>
+    <updated>2024-06-05T10:52:57.644Z</updated>
+    
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>使用LLaMA-Factory进行大模型微调</title>
     <link href="https://kaxiya1021.github.io/posts/d566576e.html"/>
     <id>https://kaxiya1021.github.io/posts/d566576e.html</id>
     <published>2024-06-04T13:07:20.000Z</published>
-    <updated>2024-06-04T13:17:04.553Z</updated>
+    <updated>2024-06-05T10:51:19.972Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="平台选择"><a href="#平台选择" class="headerlink" title="平台选择"></a>平台选择</h2><p>选用的平台是<strong>阿里云人工智能平台PAI</strong>，新人注册有免费使用额度，配置是<strong>8CPU/32G内存以及一个V100显卡</strong>，用来跑一些参数来较小的模型是足够的。主要任务是<strong>LLM-as-Judge</strong>，也就是使用大模型作为裁判评判其余模型结果的好坏。</p><h2 id="模型选择"><a href="#模型选择" class="headerlink" title="模型选择"></a>模型选择</h2><p>模型选择最开始尝试了chatGLM6B的模型，但是后来意识到参数量依旧过高，而且动不动系统盘就爆满，因此转向使用小模型，尝试了Qwen1.5-1.8B模型，最开始在PandaLM数据集上的效果惊为天人，20轮Tuning后在测试集上的准确率高达78%，但是后来尝试了其余数据集，准确率都在50%左右徘徊，效果不甚理想。于是转为使用Phi3模型。</p><p>LLaMA-Factory自带一个UI界面，不用自己写代码，只需要调配一下参数就可以自动微调。</p><p><img src="https://jsd.onmicrosoft.cn/gh/kaxiya1021/tuchuang@main/img/image-20240604140706575.png" alt=""></p><p>然后在运行后出现报错：</p><p><img src="https://jsd.onmicrosoft.cn/gh/kaxiya1021/tuchuang@main/img/image-20240604140828259.png" alt=""></p><p>原因是无法连接到huggingface，我以为是云平台网络的问题，ping了一下huggingface.co，果然ping不通。没办法，只能先把模型下载到本地再进行微调。</p><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">clone</span> <span class="title">https</span>://www.modelscope.cn/LLM-Research/Phi-<span class="number">3</span>-mini-<span class="number">4</span>k-instruct.git</span><br></pre></td></tr></table></figure><p>然后修改一下模型路径即可。</p><h2 id="数据集处理"><a href="#数据集处理" class="headerlink" title="数据集处理"></a>数据集处理</h2><h3 id="训练集"><a href="#训练集" class="headerlink" title="训练集"></a>训练集</h3><p>采用的<strong>JudgeLM</strong>数据集作为训练集，原数据集是Pairwise Comparison，需要转化为Single answer grading的格式，转化后的数据集格式预览如下：</p><p><img src="https://jsd.onmicrosoft.cn/gh/kaxiya1021/tuchuang@main/img/image-20240604142706546.png" style="zoom:40%;" /></p><p>点击开始后便开始微调了</p><p><img src="https://jsd.onmicrosoft.cn/gh/kaxiya1021/tuchuang@main/img/image-20240604143259273.png" alt=""></p><p>面板右侧有训练的loss图，训练结束后还可以查看验证集的loss，用来判断是否过拟合（该实验中验证集的比率设置为0.1）</p><p><img src="https://jsd.onmicrosoft.cn/gh/kaxiya1021/tuchuang@main/img/image-20240604143350716.png" alt=""></p><p>看了一下训练8轮需要训9个小时，开着慢慢跑吧，趁着模型在跑的时候处理一下测试集数据</p><h3 id="测试集"><a href="#测试集" class="headerlink" title="测试集"></a>测试集</h3><p>预计在四个benchmark上进行跑分，分别是<strong>judgelm、pandalm、llmbar、mtbench</strong>。</p><p>数据在测试前也需要进行处理，首先就是需要把两个回答拆分开，然后更新instruction，大概处理成了下面这个样子，output是前后两个回答相比哪一个更高的结果，测试结果需要先获得得分，然后比较前后的数值的大小，获得比较结果，再和output进行对比获得准确率：</p><p><img src="https://jsd.onmicrosoft.cn/gh/kaxiya1021/tuchuang@main/img/image-20240604154528623.png" alt=""></p><p>目前结果还没有跑出来，等训练完再看~</p>]]></content>
+    <content type="html"><![CDATA[<h2 id="平台选择">平台选择</h2><p>选用的平台是<strong>阿里云人工智能平台PAI</strong>，新人注册有免费使用额度，配置是<strong>8CPU/32G内存以及一个V100显卡</strong>，用来跑一些参数来较小的模型是足够的。主要任务是<strong>LLM-as-Judge</strong>，也就是使用大模型作为裁判评判其余模型结果的好坏。<br>开通PAI平台的过程就不说了，这个是配环境的代码，需要注意的是torch的版本，下错了版本cuda没法用</p><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">git</span> clone https://github.com/hiyouga/LLaMA-Factory.git</span><br><span class="line"><span class="attribute">cd</span> LLaMA-Factory</span><br><span class="line"><span class="attribute">pip</span> install -e .[torch,metrics]</span><br><span class="line"><span class="attribute">pip</span> install torch==<span class="number">2</span>.<span class="number">1</span>.<span class="number">2</span> torchvision==<span class="number">0</span>.<span class="number">16</span>.<span class="number">2</span> torchaudio==<span class="number">2</span>.<span class="number">1</span>.<span class="number">2</span> --index-url https://download.pytorch.org/whl/cu118</span><br></pre></td></tr></table></figure><h2 id="模型选择">模型选择</h2><p>模型选择最开始尝试了chatGLM6B的模型，但是后来意识到参数量依旧过高，而且动不动系统盘就爆满，因此转向使用小模型，尝试了Qwen1.5-1.8B模型，最开始在PandaLM数据集上的效果惊为天人，20轮Tuning后在测试集上的准确率高达78%，但是后来尝试了其余数据集，准确率都在50%左右徘徊，效果不甚理想。于是转为使用Phi3模型。</p><p>LLaMA-Factory自带一个UI界面，不用自己写代码，只需要调配一下参数就可以自动微调。</p><p><img src="https://jsd.onmicrosoft.cn/gh/kaxiya1021/tuchuang@main/img/image-20240604140706575.png" alt=""></p><p>然后在运行后出现报错：</p><p><img src="https://jsd.onmicrosoft.cn/gh/kaxiya1021/tuchuang@main/img/image-20240604140828259.png" alt=""></p><p>原因是无法连接到huggingface，我以为是云平台网络的问题，<a href="http://xn--pinghuggingface-3e3xmfm2g.co">ping了一下huggingface.co</a>，果然ping不通。没办法，只能先把模型下载到本地再进行微调。</p><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">clone</span> <span class="title">https</span>://www.modelscope.cn/LLM-Research/Phi-<span class="number">3</span>-mini-<span class="number">4</span>k-instruct.git</span><br></pre></td></tr></table></figure><p>然后修改一下模型路径即可。</p><h2 id="数据集处理">数据集处理</h2><h3 id="训练集">训练集</h3><p>采用的<strong>JudgeLM</strong>数据集作为训练集，原数据集是Pairwise Comparison，需要转化为Single answer grading的格式，转化后的数据集格式预览如下：</p><img src="https://jsd.onmicrosoft.cn/gh/kaxiya1021/tuchuang@main/img/image-20240604142706546.png" style="zoom:40%;" /><p>点击开始后便开始微调了</p><p><img src="https://jsd.onmicrosoft.cn/gh/kaxiya1021/tuchuang@main/img/image-20240604143259273.png" alt=""></p><p>面板右侧有训练的loss图，训练结束后还可以查看验证集的loss，用来判断是否过拟合（该实验中验证集的比率设置为0.1）</p><p><img src="https://jsd.onmicrosoft.cn/gh/kaxiya1021/tuchuang@main/img/image-20240604143350716.png" alt=""></p><p>看了一下训练8轮需要训9个小时，开着慢慢跑吧，趁着模型在跑的时候处理一下测试集数据</p><h3 id="测试集">测试集</h3><p>预计在四个benchmark上进行跑分，分别是<strong>judgelm、pandalm、llmbar、mtbench</strong>。</p><p>数据在测试前也需要进行处理，首先就是需要把两个回答拆分开，然后更新instruction，大概处理成了下面这个样子，output是前后两个回答相比哪一个更高的结果，测试结果需要先获得得分，然后比较前后的数值的大小，获得比较结果，再和output进行对比获得准确率：</p><p><img src="https://jsd.onmicrosoft.cn/gh/kaxiya1021/tuchuang@main/img/image-20240604154528623.png" alt=""></p><h2 id="其余尝试">其余尝试</h2>]]></content>
     
     
     <summary type="html">LLM-as-Judge大模型微调</summary>
